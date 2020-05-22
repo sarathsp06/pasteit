@@ -5,23 +5,12 @@ import (
 	"errors"
 	"time"
 
-	uuid "github.com/satori/go.uuid"
 	"github.com/twitchtv/twirp"
 
 	pb "github.com/sarathsp06/pasteit/rpc/server"
 )
 
 var validationError error
-
-// Paste represents a data to be pasted
-type Paste struct {
-	Title     string
-	ID        uuid.UUID
-	Body      string
-	Headers   map[string]string
-	createdAt time.Time
-	TTL       time.Duration
-}
 
 type store interface {
 	Store(context.Context, Paste) (Paste, error)
