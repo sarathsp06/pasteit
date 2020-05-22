@@ -1,0 +1,20 @@
+syntax = "proto3";
+package pasteit;
+option go_package = "rpc/server";
+
+// Paster service does something
+service Paster {
+  rpc Paste(PasteRequest) returns(PasteResponse);
+}
+
+message PasteRequest {
+  string title=1;
+  string content=2;
+  map<string,string> headers=3;
+  int64 ttl = 4;
+}
+
+message PasteResponse {
+   string uuid=1;
+   int64 createdAt = 2;
+}
