@@ -1,9 +1,10 @@
 package main
 
 import (
-	"flag"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/sarathsp06/pasteit/internal/store"
 
@@ -17,10 +18,12 @@ import (
 )
 
 func main() {
-	addr := flag.String("addr", ":8081", "address to run the server")
-	flag.Parse()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 	storage := store.NewMemory()
-	runServer(*addr, storage)
+	runServer(fmt.Sprintf(":%s", port), storage)
 }
 
 func runServer(addr string, storage store.Store) {
