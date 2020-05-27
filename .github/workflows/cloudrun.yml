@@ -5,14 +5,10 @@ on:
     branches: [ master ]
 
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Deploy service to Cloud Run
-        uses: stefda/action-cloud-run@v1.0
-        with:
-          image: gcr.io/leadmrktr/pasteit:latest
-          service: pasteit
-          project: leadmrktr
-          region:  asia-northeast1
-          service key: ${{ secrets.GCLOUD_AUTH }}
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build .  --file DockerfileCloudRun --build-arg GOOGLE_KEY=${{ secrets.GCLOUD_AUTH }}
