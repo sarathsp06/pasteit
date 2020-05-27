@@ -1,0 +1,20 @@
+FROM google/cloud-sdk:latest
+ARG GOOGLE_KEY
+ARG GCP_PROJECT=leadmrktr
+ARG APP=pasteit
+ARG REGION=asia-northeast1
+ARG ACCOUNT=pasteit@leadmrktr.iam.gserviceaccount.com
+
+WORKDIR /app
+ENV GOOGLE_APPLICATION_CREDENTIALS=./key.json
+RUN echo ${GOOGLE_KEY} | base64 --decode > ./key.json
+COPY . ./
+RUN cat key.json
+
+RUN gcloud auth activate-service-account ${ACCOUNT} --key-file=key.json --project=${GCP_PROJECT} &&\
+   gcloud config set account ${ACCOUNT} &&\
+   gcloud builds submit --tag gcr.io/${GCP_PROJECT}/${APP} --project=${GCP_PROJECT} &&\
+   gcloud beta run deploy ${APP} --image gcr.io/${GCP_PROJECT}/${APP} \
+  --region "${REGION}" \
+  --platform managed \
+  --allow-unauthenticated 

@@ -19,7 +19,7 @@ bin:
 build: bin
 	${GO} build -o ./bin/server ./cmd/server
 
-build_cloud:
+build_cloud: 
 	${GCLOUD} builds submit --tag gcr.io/${GCP_PROJECT}/${APP}
 	
 release_cloudrun:
