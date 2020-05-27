@@ -8,8 +8,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: stefda/action-cloud-run@v1.0
       - name: Deploy service to Cloud Run
+        uses: stefda/action-cloud-run@v1.0
         with:
           image: gcr.io/leadmrktr/pasteit
           service: pasteit
