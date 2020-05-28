@@ -9,7 +9,6 @@ WORKDIR /app
 ENV GOOGLE_APPLICATION_CREDENTIALS=./key.json
 RUN echo ${GOOGLE_KEY} | base64 --decode > ./key.json
 COPY . ./
-RUN cat key.json
 
 RUN gcloud auth activate-service-account ${ACCOUNT} --key-file=key.json --project=${GCP_PROJECT} &&\
    gcloud config set account ${ACCOUNT} &&\
