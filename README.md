@@ -10,5 +10,5 @@ make build # creates executable
 
 ### exec
 ```
-./bin/server -addr=":8080"
+PORT=8080 ./bin/server
 ```
