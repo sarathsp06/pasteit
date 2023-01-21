@@ -5,7 +5,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -24,7 +24,7 @@ func readContent() []byte {
 	}
 	if fi.Size() > 0 {
 		r := bufio.NewReader(os.Stdin)
-		data, _ := ioutil.ReadAll(r)
+		data, _ := io.ReadAll(r)
 		return data
 	}
 	return nil

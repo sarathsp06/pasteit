@@ -2,10 +2,9 @@ GO=go
 GCLOUD=gcloud
 GCP_PROJECT=leadmrktr
 APP=pasteit
-
+PROTOC=$(which protoc)
 proto:
-	~/bin/protoc \
-		--proto_path=${GOPATH}/src:.\
+	/usr/local/bin/protoc \
 		--twirp_out=. \
 	 	--go_out=. \
 		./api/protobuf/pasteit.proto 
